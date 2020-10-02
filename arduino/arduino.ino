@@ -1,7 +1,7 @@
 #include <CytronMotorDriver.h>
 
 // Configure the motor driver
-CytronMD motor1(PWM_DIR, 5, 6);  // PWM = Pin 5, DIR = Pin 6
+CytronMD motor1(PWM_DIR, 5, 4);  // PWM = Pin 5, DIR = Pin 4
 CytronMD motor2(PWM_DIR, 7, 8);  // PWM = Pin 7 DIR = Pin 8
 
 // Configure the encoder pins
@@ -72,18 +72,18 @@ void handleSerial() {
 //Shows the data (Debugging only)
 void runMotors() {
     if (newData == true) {
-        Serial.print("This just in ... ");
-        Serial.println(receivedChars);
+        //Serial.print("This just in ... ");
+        //Serial.println(receivedChars);
 
         char moveCommand = receivedChars[0];
-        Serial.print("Movement command: ");
-        Serial.println(moveCommand);
+        //Serial.print("Movement command: ");
+        //Serial.println(moveCommand);
 
         char velocityString[] = {receivedChars[1], receivedChars[2], receivedChars[3], '\0'};
         unsigned int velocity;
         sscanf(velocityString, "%d", &velocity); 
-        Serial.print("Speed: ");
-        Serial.println(velocity);
+        //Serial.print("Speed: ");
+        //Serial.println(velocity);
     
         newData = false;
 
@@ -91,18 +91,18 @@ void runMotors() {
           case 'W':
           motor1.setSpeed(velocity);
           motor2.setSpeed(velocity);
-          Serial.print("Running motor forward at speed ");
-          Serial.print(velocity);
-          Serial.println();
+          //Serial.print("Running motor forward at speed ");
+          //Serial.print(velocity);
+          //Serial.println();
           delay(10);
           break;
 
           case 'S':
           motor1.setSpeed(-velocity);
           motor2.setSpeed(-velocity);
-          Serial.print("Running motor backwards at speed ");
-          Serial.print(velocity);
-          Serial.println();
+          //Serial.print("Running motor backwards at speed ");
+          //Serial.print(velocity);
+          //Serial.println();
           delay(10);
           break;
     
