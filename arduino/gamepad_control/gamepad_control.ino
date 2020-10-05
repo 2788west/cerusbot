@@ -5,7 +5,7 @@
 
 // Configure the motor driver
 CytronMD motor1(PWM_DIR, 5, 4);  // PWM = Pin 5, DIR = Pin 4
-CytronMD motor2(PWM_DIR, 7, 8);  // PWM = Pin 7 DIR = Pin 8
+CytronMD motor2(PWM_DIR, 6, 7);  // PWM = Pin 6 DIR = Pin 7
 
 // Configure serial communication variables
 const byte numChars = 18;
@@ -23,7 +23,7 @@ boolean newData = false;
 //============
 
 void setup() {
-    Serial.begin(9600);
+    Serial.begin(115200);
     }
 
 //============
@@ -35,9 +35,11 @@ void loop() {
             // this temporary copy is necessary to protect the original data
             // because strtok() used in parseData() replaces the commas with \0
         parseData();
-        showParsedData();
+        //showParsedData();
         newData = false;
     }
+
+    runMotors();
 }
 
 //============
