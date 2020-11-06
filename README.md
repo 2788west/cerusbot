@@ -8,6 +8,8 @@ Cerus is a four-wheeled mobile robot platform. It operates based on an Arduino M
 ![Block Diagram](https://raw.githubusercontent.com/2788west/cerusbot/c17cc8c20f015579d99ba5fb8604a7d372f4df92/block_diagram.svg)
 
 
-## Arduino
+## arduino
 
-The Arduino code enables low-level motor control via PWM and reads two motor encoders (left side and right side). The Arduino will accept linear and angular speed in the format `<float, float>` and continuously return the left and right wheel position as a pair of integer values `<int, int>`. 
+Enables low-level motor control via PWM and reads two motor encoders (left side and right side). The Arduino will accept linear and angular speed in the format `<float, float>` (based on the [ROS Twist Message](http://docs.ros.org/en/melodic/api/geometry_msgs/html/msg/Twist.html) and continuously return the left and right wheel position as a pair of integer values `<int, int>`. 
+
+## jetson
