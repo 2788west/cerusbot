@@ -5,7 +5,7 @@
 Cerus is a four-wheeled mobile robot platform. It operates based on an Arduino Mega 2560 and NVIDIA Jetson Nano. The code in this repo enables both teleoperation via an Xbox controller as well as a simple go-to-goal behaviour with encoder feedback. Even though Cerus features mecanum wheels, this code treats the robot's base as a differential drive system, pairing left and right wheels together.
 
 ## Hardware Overview
-![Block Diagram](https://raw.githubusercontent.com/2788west/cerusbot/master/block_diagram.svg)
+![Block Diagram](https://raw.githubusercontent.com/2788west/cerusbot/8304e2776a1b0b4a7896b6be7f84befea37baf97/block_diagram.svg)
 
 
 ## arduino
