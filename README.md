@@ -22,4 +22,4 @@ To teleoperate Cerus via an XBox controller or similar gamepad, simply run `game
 
 ### Go-To-Goal
 
-TK
+![Go-To-Goal Behavior](https://raw.githubusercontent.com/2788west/cerusbot/d42beb8d2b7b98ddc8b72780440393ccbcc01055/go-to-goal_behavior.svg)
