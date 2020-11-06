@@ -10,6 +10,16 @@ Cerus is a four-wheeled mobile robot platform. It operates based on an Arduino M
 
 ## arduino
 
-Enables low-level motor control via PWM and reads two motor encoders (left side and right side). The Arduino will accept linear and angular speed in the format `<float, float>` (based on the [ROS Twist Message](http://docs.ros.org/en/melodic/api/geometry_msgs/html/msg/Twist.html) and continuously return the left and right wheel position as a pair of integer values `<int, int>`. 
+Enables low-level motor control via PWM and reads two motor encoders (left side and right side). The Arduino will accept linear and angular speed in the format `<float, float>` (based on the [ROS Twist Message](http://docs.ros.org/en/melodic/api/geometry_msgs/html/msg/Twist.html)) and continuously return the left and right wheel position as a pair of integer values `<int, int>`. 
 
 ## jetson
+
+Enables two behaviors: Teleop and Go-To-Goal.
+
+### Teleop
+
+To teleoperate Cerus via an XBox controller or similar gamepad, simply run `gamepad_control.ipynb` in Jupyter. The left and right analog stick will control the wheels on either side of the robot
+
+### Go-To-Goal
+
+TK
