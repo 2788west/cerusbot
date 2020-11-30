@@ -67,6 +67,10 @@ void setup() {
     attachInterrupt(4, flag2, RISING);
     
     Serial.begin(115200);
+    
+    Serial.print(left_count);
+    Serial.print(",");
+    Serial.println(right_count); 
 }
 
 
@@ -88,16 +92,24 @@ void loop() {
 
     //check if the encoder flags have been raised by the hardware interrupts
     if(INTFLAG1) {
-      Serial.print("R");
-      Serial.println(right_count);      
+      Serial.print("<");
+      Serial.print(left_count);
+      Serial.print(",");
+      Serial.print(right_count);
+      Serial.println(">");      
       delay(50);
       INTFLAG1 = 0; //clear flag
+      
     }
     if(INTFLAG2) {
-      Serial.print("L");
-      Serial.println(left_count);
+      Serial.print("<");
+      Serial.print(left_count);
+      Serial.print(",");
+      Serial.print(right_count);
+      Serial.println(">");
       delay(50);
       INTFLAG2 = 0; //clear flag
+      
   }
 }
 
@@ -175,16 +187,7 @@ void runMotors () {
   int leftSpeed = (linearVelocity + angularVelocity) * 100;
   int rightSpeed = (linearVelocity - angularVelocity) * 100;
 
-  
 
-  // For testing only
-  /*
-  Serial.print("Left Speed: ");
-  Serial.println(leftSpeed);
-  Serial.print("Right Speed: ");
-  Serial.println(rightSpeed);
-  */  
-  
   // Map speed to left motors
   motorFL.setSpeed(map(leftSpeed, 100, -100, cytronMin, cytronMax));
   motorRL.setSpeed(map(leftSpeed, 100, -100, cytronMin, cytronMax));
