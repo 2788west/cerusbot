@@ -70,7 +70,10 @@ void setup() {
     
     Serial.print(left_count);
     Serial.print(",");
-    Serial.println(right_count); 
+    Serial.println(right_count);
+    Serial.print(left_count);
+    Serial.print(",");
+    Serial.println(right_count);  
 }
 
 
