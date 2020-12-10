@@ -17,7 +17,6 @@
 #include "CytronMotorDriver.h"
 
 // Define right and left encoder channels
-
 #define RCHA 21
 #define RCHB 20
 #define LCHA 19
@@ -37,6 +36,7 @@ CytronMD motorRR(PWM_DIR, 11, 10); // PWM 2 = Pin 11, DIR 2 = Pin 10
 int cytronMin = -255;
 int cytronMax = 255; 
 
+
 // Variables for serial communication
 const byte numChars = 32;
 char receivedChars[numChars];
@@ -48,7 +48,6 @@ float linearVelocity = 0.0;
 float angularVelocity = 0.0;
 
 // Encoder variables
-
 volatile int right_count = 0; //right encoder count
 volatile int left_count = 0; //left encoder count
 volatile byte INTFLAG1 = 0; //interrupt status flag
@@ -87,9 +86,11 @@ void loop() {
         strcpy(tempChars, receivedChars);
             // this temporary copy is necessary to protect the original data
             //   because strtok() replaces the commas with \0
+        
         parseData();
-        // showParsedData();
+        
         runMotors();
+        
         newData = false;
     }
 
@@ -169,17 +170,9 @@ void parseData() {
 
 //============
 
-void showParsedData() {
-   
-    Serial.print("Linear Velocity ");
-    Serial.println(linearVelocity);
-    Serial.print("Angular Velocity ");
-    Serial.println(angularVelocity);
-}
-
 void runMotors () {
   
-  // For a differential drive, the sum of linear and angular velocity cannot be greater than 1
+  // For a differential drive, the sum of linear and angular velocity cannot be greater than 1.0
   if (abs(linearVelocity) + abs(angularVelocity) > 1.0) {
     float temp = abs(linearVelocity) + abs(angularVelocity);
     linearVelocity = linearVelocity / temp;
@@ -199,16 +192,6 @@ void runMotors () {
   motorFR.setSpeed(map(rightSpeed, 100, -100, cytronMin, cytronMax));
   motorRR.setSpeed(map(rightSpeed, 100, -100, cytronMin, cytronMax));
   
-  /*
-  //Mecanum mapping
-  // Map speed to left motors
-  motorFL.setSpeed(map(leftSpeed, -100, 100, cytronMin, cytronMax));
-  motorRL.setSpeed(map(-leftSpeed, -100, 100, cytronMin, cytronMax));
-
-  // Map speed to right motors
-  motorFR.setSpeed(map(-rightSpeed, -100, 100, cytronMin, cytronMax));
-  motorRR.setSpeed(map(rightSpeed, -100, 100, cytronMin, cytronMax));
-  */
 }
 
 //flag for the right encoder; CCW is forward
