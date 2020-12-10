@@ -17,7 +17,6 @@
 #include "CytronMotorDriver.h"
 
 // Define right and left encoder channels
-
 #define RCHA 21
 #define RCHB 20
 #define LCHA 19
@@ -58,6 +57,7 @@ volatile byte INTFLAG2 = 0; //second interrupt status flag
 //============
 
 void setup() {
+    
     pinMode(RCHA, INPUT);
     pinMode(RCHB, INPUT);
     pinMode(LCHA, INPUT);
@@ -68,6 +68,7 @@ void setup() {
     
     Serial.begin(115200);
     
+    //Send two pairs of initial encoder values for pose estimation
     Serial.print(left_count);
     Serial.print(",");
     Serial.println(right_count);
@@ -88,8 +89,9 @@ void loop() {
             // this temporary copy is necessary to protect the original data
             //   because strtok() replaces the commas with \0
         parseData();
-        // showParsedData();
+        
         runMotors();
+     
         newData = false;
     }
 
@@ -169,14 +171,6 @@ void parseData() {
 
 //============
 
-void showParsedData() {
-   
-    Serial.print("Linear Velocity ");
-    Serial.println(linearVelocity);
-    Serial.print("Angular Velocity ");
-    Serial.println(angularVelocity);
-}
-
 void runMotors () {
   
   // For a differential drive, the sum of linear and angular velocity cannot be greater than 1
@@ -197,18 +191,8 @@ void runMotors () {
 
   // Map speed to right motors
   motorFR.setSpeed(map(rightSpeed, 100, -100, cytronMin, cytronMax));
-  motorRR.setSpeed(map(rightSpeed, 100, -100, cytronMin, cytronMax));
+  motorRR.setSpeed(map(rightSpeed, 100, -100, cytronMin, cytronMax));  
   
-  /*
-  //Mecanum mapping
-  // Map speed to left motors
-  motorFL.setSpeed(map(leftSpeed, -100, 100, cytronMin, cytronMax));
-  motorRL.setSpeed(map(-leftSpeed, -100, 100, cytronMin, cytronMax));
-
-  // Map speed to right motors
-  motorFR.setSpeed(map(-rightSpeed, -100, 100, cytronMin, cytronMax));
-  motorRR.setSpeed(map(rightSpeed, -100, 100, cytronMin, cytronMax));
-  */
 }
 
 //flag for the right encoder; CCW is forward
@@ -225,6 +209,7 @@ void flag1() {
 
   }
 }
+
 //flag for the left encoder; CW is forward
 void flag2() {
   INTFLAG2 = 1;
