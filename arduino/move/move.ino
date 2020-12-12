@@ -3,10 +3,9 @@
  *
  * This code is inteded for the Arduino MEGA 2560. It receives data from a Jetson 
  * Nano via a serial connection and controls the motors of the Cerus mobile robot 
- * platform via two Cytron motor drivers. It is based on the incredible work 
- * of Daniel Snider (https://github.com/danielsnider) and Robin2 
- * (https://forum.arduino.cc/index.php?topic=396450.0). Please don't hesitate to
- * email me with suggestions or questions.
+ * platform via two Cytron motor drivers. It is based on the work of Daniel Snider 
+ * (https://github.com/danielsnider) and Robin2 (https://forum.arduino.cc/index.php?topic=396450.0). 
+ * Please don't hesitate to email me with suggestions or questions.
  * 
  * AUTHOR   : Johan Schwind
  * WEBSITE  : www.johanschwind.xyz
@@ -32,7 +31,7 @@ CytronMD motorRL(PWM_DIR, 5, 4); // PWM 2 = Pin 4, DIR 2 = Pin 5
 CytronMD motorFR(PWM_DIR, 9, 8);  // PWM 1 = Pin 9, DIR 1 = Pin 8
 CytronMD motorRR(PWM_DIR, 11, 10); // PWM 2 = Pin 11, DIR 2 = Pin 10
 
-// Max reverse and forward speed of the Cytron motor driver
+// Max reverse and forward speed
 int cytronMin = -255;
 int cytronMax = 255; 
 
@@ -66,7 +65,8 @@ void setup() {
     attachInterrupt(4, flag2, RISING);
     
     Serial.begin(115200);
-    
+
+    //Send initial encoder values
     Serial.print(left_count);
     Serial.print(",");
     Serial.println(right_count);
@@ -96,21 +96,17 @@ void loop() {
 
     //check if the encoder flags have been raised by the hardware interrupts
     if(INTFLAG1) {
-      Serial.print("<");
       Serial.print(left_count);
       Serial.print(",");
-      Serial.print(right_count);
-      Serial.println(">");      
+      Serial.println(right_count);       
       delay(50);
       INTFLAG1 = 0; //clear flag
       
     }
-    if(INTFLAG2) {
-      Serial.print("<");
+    if(INTFLAG2) {      
       Serial.print(left_count);
       Serial.print(",");
-      Serial.print(right_count);
-      Serial.println(">");
+      Serial.println(right_count);
       delay(50);
       INTFLAG2 = 0; //clear flag
       
@@ -172,13 +168,7 @@ void parseData() {
 
 void runMotors () {
   
-  // For a differential drive, the sum of linear and angular velocity cannot be greater than 1.0
-  if (abs(linearVelocity) + abs(angularVelocity) > 1.0) {
-    float temp = abs(linearVelocity) + abs(angularVelocity);
-    linearVelocity = linearVelocity / temp;
-    angularVelocity = angularVelocity / temp;    
-  }
- 
+  
   // Convert float values to an integer for left and right wheels
   int leftSpeed = (linearVelocity + angularVelocity) * 100;
   int rightSpeed = (linearVelocity - angularVelocity) * 100;
