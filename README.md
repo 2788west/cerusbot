@@ -9,9 +9,9 @@ Cerus is a four-wheeled mobile robot platform. It operates based on an Arduino M
 
 
 ## arduino
-`move.ino` enables low-level control of four motors using Cytron motor drivers and reads two quadrature motor encoders (left side and right side). The Arduino will accept linear and angular speed in the format `<float, float>` and continuously return the left and right wheel position as a pair of integer values `int, int`. This code is intended to be used with the standard Teleop and Go-To-Goal notebooks. To use this code with a Cytron motor driver, please add their driver library in the Arduino IDE under Tools > Manage Libraries > Search for: "Cytron Motor Drivers Library".
+`move.cpp` enables low-level control of four motors using Cytron motor drivers and reads two quadrature motor encoders (left side and right side). The Arduino will accept linear and angular speed in the format `<float, float>` and continuously return the left and right wheel position as a pair of integer values `int, int`. This code is intended to be used with the standard Teleop and Go-To-Goal notebooks. To use this code with a Cytron motor driver, please add their driver library in the Arduino IDE under Tools > Manage Libraries > Search for: "Cytron Motor Drivers Library".
 
-`ROS_move.ino` implements a ROS node on the Arduino that subscribes to the topic `cmd_vel` and the `geometry_msgs/Twist` message to receive velocity commands from a computer. The implementation enables linear movement of the robot in the X and Y direction (using the mecanum wheels) as well as rotation around the Z axis.
+`ROS_move.cpp` implements a ROS node on the Arduino that subscribes to the topic `cmd_vel` and the `geometry_msgs/Twist` message to receive velocity commands from a computer. The implementation enables linear movement of the robot in the X and Y direction (using the mecanum wheels) as well as rotation around the Z axis.
 
 ## jetson
 
