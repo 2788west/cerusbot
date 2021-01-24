@@ -2,16 +2,13 @@
 
 # Cerusbot
 
-Cerus is a four-wheeled mobile robot platform. It operates based on an Arduino Mega 2560 and NVIDIA Jetson Nano. The code in this repo enables both teleoperation via an Xbox controller as well as a simple go-to-goal behaviour with encoder feedback. Even though Cerus features mecanum wheels, this code treats the robot's base as a differential drive system, pairing left and right wheels together.
+Cerus is a four-wheeled mobile robot platform. It operates based on an Arduino Mega 2560 and NVIDIA Jetson Nano. The code in this repo enables both teleoperation via an Xbox controller as well as a simple go-to-goal behaviour with encoder feedback. Even though Cerus features mecanum wheels, thes basic Arduino and Jetson Nano code treats the robot's base as a differential drive system, pairing left and right wheels together. This simplification is intended to keep the code more beginner-friendly.
 
 ## Hardware Overview
 ![Block Diagram](https://raw.githubusercontent.com/2788west/cerusbot/8304e2776a1b0b4a7896b6be7f84befea37baf97/block_diagram.svg)
 
-
 ## arduino
 `move.cpp` enables low-level control of four motors using Cytron motor drivers and reads two quadrature motor encoders (left side and right side). The Arduino will accept linear and angular speed in the format `<float, float>` and continuously return the left and right wheel position as a pair of integer values `int, int`. This code is intended to be used with the standard Teleop and Go-To-Goal notebooks. To use this code with a Cytron motor driver, please add their driver library in the Arduino IDE under Tools > Manage Libraries > Search for: "Cytron Motor Drivers Library".
-
-`ROS_move.cpp` implements a ROS node on the Arduino that subscribes to the topic `cmd_vel` and the `geometry_msgs/Twist` message to receive velocity commands from a computer. The implementation enables linear movement of the robot in the X and Y direction (using the mecanum wheels) as well as rotation around the Z axis.
 
 ## jetson
 
@@ -27,3 +24,6 @@ To teleoperate Cerus via an XBox controller or similar gamepad, simply run `game
 
 ## Make your own
 With the parts in the bill of materials (BOM.csv) and the 3D print files (STL.zip) you can build your own version of Cerus!
+
+# Cerusbot with ROS
+The ROS directory contains more advanced code for teleoperation that takes full advantage of Cerus' mecanum wheels and enables movement in the X and Y direction as well as around the Z axis. 
