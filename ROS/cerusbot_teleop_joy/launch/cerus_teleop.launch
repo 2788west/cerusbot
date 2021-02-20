@@ -1,5 +1,4 @@
 <launch>
-<launch>
  <!-- joy node -->
   <node respawn="true" pkg="joy"
         type="joy_node" name="cerus_teleop" >
