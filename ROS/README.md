@@ -7,8 +7,9 @@ ROS packages for the Cerus mobile robot developed in ROS Noetic. These packages 
 Enables remote control of Cerus. Teleop has been tested with an XBOX One controller and should work with any other Linux-compatible controller but the axis mapping might differ.
 To install cerus_teleop_joy, download the folder to your catkin_ws folder. Then compile your workspace:
 
-```console
+```sh
 cd ~/catkin_ws/
 catkin_make
+source devel/setup.bash
 ```
 
