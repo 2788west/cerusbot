@@ -1,10 +1,15 @@
 <launch>
+<launch>
  <!-- joy node -->
   <node respawn="true" pkg="joy"
         type="joy_node" name="cerus_teleop" >
     <param name="dev" type="string" value="/dev/input/js0" />
     <param name="deadzone" value="0.12" />
   </node>
+
+ <!-- rosserial node -->
+   <node pkg="rosserial_python" type="serial_node.py"
+	 args="/dev/ttyACM0" name="serial_node" respawn="true"/>
 
  <!-- Axes -->
   <param name="axis_linear" value="1" type="int"/>
