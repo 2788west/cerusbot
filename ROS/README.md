@@ -2,6 +2,10 @@
 
 ROS packages for the Cerus mobile robot developed in ROS Noetic. These packages have been tested on a Jetson Nano 4GB with an Arduino MEGA 2560. 
 
+## firmware
+
+The firmware is intended to run on the Arduino Mega 2560 and handles low-level motor control. It's written to work with Cytron 3A motor drivers, but can easily be changed to work with a different type of driver.
+
 ## cerus_teleop_joy
 
 Enables remote control of Cerus. Teleop has been tested with an XBOX One controller and should work with any other Linux-compatible controller but the axis mapping might differ.
